@@ -6,3 +6,50 @@ datasource db {
 generator client {
   provider = "prisma-client-js"
 }
+
+model Turma {
+  id  Int   @id @default(autoincrement())
+  qntd Int 
+  aluno Aluno? @relation(fields: [idAluno], references: [id])
+  idAluno Int 
+  unidadeEducacional UnidadeEducacional[]
+}
+
+model UnidadeEducacional{
+    id  Int   @id @default(autoincrement())
+    nome String 
+    turma Turma? @relation(fields: [idTurma], references: [id])
+    idTurma Int?
+    material Material[]
+}
+
+model Material {
+  id  Int   @id @default(autoincrement())
+  nome String
+  quantidade Int @default(0)
+  unidadeOperacional UnidadeEducacional?  @relation(fields: [idUnidadeOperacional], references: [id])
+  idUnidadeOperacional Int?
+  disciplina  Disciplina[]
+}
+
+model Aluno {
+  id Int @id @default(autoincrement())
+  nome Int
+  turma Turma[]
+}
+
+model Professor {
+  id Int @id @default(autoincrement())
+  nome String
+  disciplina  Disciplina[]
+}
+
+model Disciplina {
+  id Int @id @default(autoincrement())
+  nome Int
+  material Material? @relation(fields: [idMaterial], references: [id])
+  idMaterial Int?
+  professor Professor? @relation(fields: [idProfessor], references: [id])
+  idProfessor Int?
+}
+
