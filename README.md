@@ -1,3 +1,8 @@
+# schoolSupplies
+
+# Repository cloned initial to:
+Este repositório contém o projeto inicial para o workshop Database Workflows & API Development with Prisma de Nikolas Burk.
+
 # Prisma ORM
 
 ## **Models in Prisma Client**
