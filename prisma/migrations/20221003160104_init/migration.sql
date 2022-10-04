@@ -26,7 +26,7 @@ CREATE TABLE "Material" (
 -- CreateTable
 CREATE TABLE "Aluno" (
     "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-    "nome" INTEGER NOT NULL
+    "nome" TEXT NOT NULL
 );
 
 -- CreateTable
@@ -38,7 +38,7 @@ CREATE TABLE "Professor" (
 -- CreateTable
 CREATE TABLE "Disciplina" (
     "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-    "nome" INTEGER NOT NULL,
+    "nome" TEXT NOT NULL,
     "idMaterial" INTEGER,
     "idProfessor" INTEGER,
     CONSTRAINT "Disciplina_idMaterial_fkey" FOREIGN KEY ("idMaterial") REFERENCES "Material" ("id") ON DELETE SET NULL ON UPDATE CASCADE,

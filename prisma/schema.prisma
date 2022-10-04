@@ -34,7 +34,7 @@ model Material {
 
 model Aluno {
   id Int @id @default(autoincrement())
-  nome Int
+  nome String
   turma Turma[]
 }
 
@@ -46,7 +46,7 @@ model Professor {
 
 model Disciplina {
   id Int @id @default(autoincrement())
-  nome Int
+  nome String
   material Material? @relation(fields: [idMaterial], references: [id])
   idMaterial Int?
   professor Professor? @relation(fields: [idProfessor], references: [id])
