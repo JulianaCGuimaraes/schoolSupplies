@@ -6,6 +6,7 @@ const prisma = new PrismaClient()
 
 async function main() {
 
+/*
   const result = await prisma.aluno.create({
     data: {
       nome: "Vitor",
@@ -14,17 +15,17 @@ async function main() {
           qntd: 20,
           unidadeEducacional:{
             create:{
-              nome: "Camaragibe",
+              nome: "Santo Amaro",
               material:{
                 create:{
-                  nome: "Ficha",
-                  quantidade: 3,
+                  nome: "livro didatico",
+                  quantidade: 1,
                   disciplina:{
                     create:{
-                      nome: "Empreendendorismo",
+                      nome: "Técnico em Administração",
                       professor:{
                         create:{
-                          nome: "Thiago",
+                          nome: "Carla",
                     },
                   },
                 },
@@ -38,6 +39,16 @@ async function main() {
 }
 });
   console.log(result);
+}
+*/
+
+const result1 = await prisma.disciplina.findMany({
+    where:{
+      id: 1,
+    },
+});
+console.log(result1);
+
 }
 
 main()
