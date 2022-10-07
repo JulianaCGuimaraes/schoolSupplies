@@ -7,9 +7,19 @@ const app = express();
 
 app.use(express.json());
 
-app.get("/material", async (req, res) => {
-    const result = await prisma.material.findMany();
-        res.json(result);
+app.get("/list/material/", async (req, res) => {
+  const result1 = await prisma.material.findMany();
+      res.json(result1);
+});
+
+app.get("/get/:id/material", async (req, res) => {
+  const {id} = req.params;
+    const result2 = await prisma.material.findMany({
+      where: {
+        id: Number(id),
+      },
+    });
+        res.json(result2);
 });
 
 app.listen(3000, () =>
