@@ -1,0 +1,12 @@
+{
+    "openapi": "3.0.0",
+    "info":{
+        "title": "API do schoolSupplies",
+        "description": "Essa API tem como objetivo documentar/testar o schoolSupplies",
+        "termsOfService": "https://localhost:3000/terms",
+        "contact": {
+            "email": "jujucg15@gmail.com"
+    },
+    "version": "1.0.0"
+    }
+}

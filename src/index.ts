@@ -1,27 +1,21 @@
-import { PrismaClient } from "@prisma/client";
 import express from "express";
+import swaggerUi from "swagger-ui-express";
+import {router} from "./routes";
+import swaggerDocs from "./swagger.json";
 
-const prisma = new PrismaClient();
 
 const app = express();
 
 app.use(express.json());
 
-app.get("/list/material/", async (req, res) => {
-  const result1 = await prisma.material.findMany();
-      res.json(result1);
-});
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
-app.get("/get/:id/material", async (req, res) => {
-  const {id} = req.params;
-    const result2 = await prisma.material.findMany({
-      where: {
-        id: Number(id),
-      },
+app.get("/terms", async (req, res) => {
+    return res.json({
+      message: "Termos de Serviço",
     });
-        res.json(result2);
 });
 
-app.listen(3000, () =>
-  console.log(`🚀 Server ready at: http://localhost:3000`)
-);
+app.use("/v1", router);
+app.listen(3000, () => console.log("Server is running on port 3000"));
+
