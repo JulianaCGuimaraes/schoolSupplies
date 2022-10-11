@@ -1,6 +1,6 @@
 import { response, Router } from "express";
 import {v4 as uuid } from "uuid"
-import {ensuredAuthenticated} from "./middleware";
+import {ensuredAuthenticated} from "./modules/materiais/infra/http/middlewares/middleware";
 
 const router = Router();
 
