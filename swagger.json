@@ -8,5 +8,53 @@
             "email": "jujucg15@gmail.com"
     },
     "version": "1.0.0"
+    },
+    "server":[
+        {
+            "url":"http://localhost:300/v1",
+            "description": "API de test"
+        },
+        {
+        "url":"http://codedrops.com",
+        "description": "API de produção"
+        }
+    ],
+    "paths": {
+        "/materials": {
+            "post":{
+                "summary": "Cadastro de material",
+                "description": "",
+                "tags":["Materials"],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schema/Material"
+                            }
+                        }
+                    }
+            }
+        }
+    }
+},
+"components": {
+    "schema": {
+        "Material": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "number",
+                },
+                "name": {
+                    "type": "string",
+                },
+                "quantity":{
+                    "type":"number",
+                },
+                "idEducationalUnity":{
+                    "type": "number",
+                }
+            }
+        }
     }
 }

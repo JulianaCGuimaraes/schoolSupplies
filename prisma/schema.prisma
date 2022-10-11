@@ -7,49 +7,50 @@ generator client {
   provider = "prisma-client-js"
 }
 
-model Turma {
-  id  Int   @id @default(autoincrement())
-  qntd Int 
-  aluno Aluno? @relation(fields: [idAluno], references: [id])
-  idAluno Int 
-  unidadeEducacional UnidadeEducacional[]
-}
-
-model UnidadeEducacional{
-    id  Int   @id @default(autoincrement())
-    nome String 
-    turma Turma? @relation(fields: [idTurma], references: [id])
-    idTurma Int?
-    material Material[]
-}
-
 model Material {
-  id  Int   @id @default(autoincrement())
-  nome String
-  quantidade Int @default(0)
-  unidadeOperacional UnidadeEducacional?  @relation(fields: [idUnidadeOperacional], references: [id])
-  idUnidadeOperacional Int?
-  disciplina  Disciplina[]
+  id Int @id @default(autoincrement())
+  name String 
+  quantity Int @default(0)
+  educationalUnity EducationalUnity? @relation(fields: [idEducationalUnity], references: [id])
+  idEducationalUnity Int?
+  disciplines Discipline[]
 }
 
-model Aluno {
+model Class {
   id Int @id @default(autoincrement())
-  nome String
-  turma Turma[]
+  studentsQuantity Int
+  educationalUnities EducationalUnity[]
+  student Student? @relation(fields: [studentId], references: [id])
+  studentId Int?
 }
 
-model Professor {
+model Teacher {
   id Int @id @default(autoincrement())
-  nome String
-  disciplina  Disciplina[]
+  name String
+  disciplines Discipline[]
+}
+model EducationalUnity{
+    id  Int   @id @default(autoincrement())
+    name String 
+    class Class? @relation(fields: [classId], references: [id])
+    classId Int?
+    materials Material[]
+
 }
 
-model Disciplina {
+model Student {
   id Int @id @default(autoincrement())
-  nome String
-  material Material? @relation(fields: [idMaterial], references: [id])
-  idMaterial Int?
-  professor Professor? @relation(fields: [idProfessor], references: [id])
-  idProfessor Int?
+  name String
+  classes Class[]
+}
+
+
+model Discipline {
+  id Int @id @default(autoincrement())
+  name String
+  material Material? @relation(fields: [materialId], references: [id])
+  materialId Int?
+  teacher Teacher? @relation(fields: [teacherId], references: [id])
+  teacherId Int?
 }
 
