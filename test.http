@@ -1,0 +1,5 @@
+GET http://localhost:3000/list/material
+
+###
+
+GET http://localhost:3000/get/1/material

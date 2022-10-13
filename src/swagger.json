@@ -1,0 +1,149 @@
+{
+    "openapi": "3.0.0",
+    "info":{
+        "title": "API do schoolSupplies",
+        "description": "Essa API tem como objetivo documentar/testar o schoolSupplies",
+        "termsOfService": "http://localhost:3000/terms",
+        "contact": {
+            "email": "jujucg15@gmail.com"
+    },
+    "version": "1.0.0"
+    },
+    "servers":[
+        {
+            "url":"http://localhost:3000/v1",
+            "description": "API de test"
+        }
+    ],
+    "paths": {
+        "/materials": {
+            "post":{
+                "summary": "Cadastro de material",
+                "description": "Essa rota será responsável por cadastrar um novo material",
+                "tags":["Materials"],
+                "security": [{"bearerAuth": []}],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Material"
+                            },
+                            "examples": {
+                                "material": {
+                                    "value": {
+                                        "name": "botas",
+                                        "quantity": 2
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "400":{
+                        "description": "Product Already exists!"
+                    },
+                    "200":{
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema":{
+                                    "type": "object",
+                                    "$ref":"#/components/schemas/Material"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/materials/findByName": {
+         "get":{
+            "summary": "Busca de um material pelo nome",
+            "description": "Busca de um material pelo nome",
+            "tags":["Materials"],
+            "security": [{"bearerAuth": []}],
+            "parameters": [
+                {
+                "name": "name",
+                "in": "query",
+                "description": "Nome do material",
+                "required": true
+                }
+            ],
+        "responses": {
+            "200":{
+                "description": "OK",
+                "content": {
+                    "application/json": {
+                        "schema":{
+                            "type": "object",
+                            "$ref":"#/components/schemas/Material"
+                            
+                        }
+                    }
+                }
+            }
+        }
+    }
+        },
+        "/materials/{id}": {
+            "get":{
+            "summary": "Busca de um material pelo id",
+            "description": "Busca de um material pelo id",
+            "tags":["Materials"],
+            "security": [{"bearerAuth": []}],
+            "parameters": [
+                {
+                "name": "id",
+                "in": "path",
+                "description": "id do material",
+                "required": true
+                }
+            ],
+        "responses": {
+            "200":{
+                "description": "OK",
+                "content": {
+                    "application/json": {
+                        "schema":{
+                            "type": "object",
+                            "$ref":"#/components/schemas/Material"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+},
+"components": {
+    "schemas": {
+        "Material": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "quantity":{
+                    "type":"number"
+                },
+                "id": {
+                    "type": "string"
+                }
+            }
+        }
+    },
+    "securitySchemes": {
+        "bearerAuth": {
+            "type": "http",
+            "scheme": "bearer",
+            "bearerFormat": "JWT"
+        }
+    }
+}
+
+}
