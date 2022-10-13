@@ -4,45 +4,45 @@ const prisma = new PrismaClient()
 
 const materialData: Prisma.MaterialCreateInput[] = [
     {
-        nome: "botas",
-        quantidade: 2,
-        disciplina:{
+        name: "botas",
+        quantity: 2,
+        disciplines:{
              create:[
              {
-                nome: "Soldagem",
+                name: "Soldagem",
             },
             ],
         },
     },
     {
-        nome: "Notebook",
-        quantidade: 5,
-        disciplina:{
+        name: "Notebook",
+        quantity: 5,
+        disciplines:{
              create:[
              {
-                nome: "Usinagem",
+                name: "Usinagem",
             },
             ],
         },
     },
     {
-        nome: "Mapa de risco",
-        quantidade: 10,
-        disciplina:{
+        name: "Mapa de risco",
+        quantity: 10,
+        disciplines:{
              create:[
              {
-                nome: "Desenho técnico",
+                name: "Desenho técnico",
             },
             ],
         },
     },
     {
-        nome: "papel milímetrado",
-        quantidade: 50,
-        disciplina:{
+        name: "papel milímetrado",
+        quantity: 50,
+        disciplines:{
              create:[
              {
-                nome: "Segurança no trabalho",
+                name: "Segurança no trabalho",
             },
             ],
         },
@@ -64,8 +64,7 @@ async function main() {
   
   main()
     .catch((e) => {
-      console.error(e)
-      process.exit(1)
+      throw e;
     })
     .finally(async () => {
       await prisma.$disconnect()
