@@ -1,76 +1,75 @@
-import { response, Router } from "express";
+import { Router } from "express";
 import {v4 as uuid } from "uuid"
-import {ensuredAuthenticated} from "./modules/materiais/infra/http/middlewares/middleware";
+import {ensuredAuthenticated} from "./middleware";
 
 const router = Router();
 
-interface ProductsDTO {
-    name: string;
-    description: string;
-    price: number;
+interface MaterialsDTO {
     id: string;
+    name: string;
+    quantity: number;
+    //idEducationalUnity: number;
 }
 
-const products: ProductsDTO[] = [];
+const materials: MaterialsDTO[] = [];
 
-router.get("/products/findByName", (req, res) => {
-    const { name } = req.query;
-    const product = products.filter((p) => p.name.includes(String(name)));
-    return response.json(product);
-});
+router.post("/materials", ensuredAuthenticated, (request, response) => {
+    const {name, quantity} = request.body;
 
-router.get("/products/:id", (req, res) => {
-    const { id } = req.params;
-    const product = products.find((product) => product.id === id);
-    return response.json(product);
-});
-
-router.post("/products", ensuredAuthenticated, (req, res) => {
-    const { name, description, price } = req.body;
-
-    const productAlreadyExists = products.find(
-    (product) => product.name === name
+    const materialAlreadyExists = materials.find(
+    (material) => material.name === name
 );
 
- if (productAlreadyExists) {
-    return res.status(400).json({
+ if (materialAlreadyExists) {
+    return response.status(400).json({
         message: "Product already exists!",
     });
 }
 
-const product: ProductsDTO = {
-    description,
-    name,
-    price,
+const material: MaterialsDTO = {
     id: uuid(),
+    name,
+    quantity,
 };
 
-products.push(product);
+materials.push(material);
 
-return res.json(product);
+return response.json(material);
 });
 
-router.put("/products/:id", ensuredAuthenticated, (req, res) => {
-    const { id } = req.params;
-    const {name, description, price} = req.body;
+router.get("/materials/findByName", (request, response) => {
+    const { name } = request.query;
+    const material = materials.filter((m) => m.name.includes(String(name)));
+    return response.json(material);
+});
 
-    const productIndex = products.findIndex((product) => product.id === id);
+router.get("/materials/:id", (request, response) => {
+    const { id } = request.params;
+    const material = materials.find((material) => material.id === id);
+    return response.json(material);
+});
 
-    if (productIndex === -1) {
-        return res.status(400).json({
+
+router.put("/products/:id", ensuredAuthenticated, (request, response) => {
+    const { id } = request.params;
+    const {name, quantity} = request.body;
+
+    const materialIndex = materials.findIndex((material) => material.id === id);
+
+    if (materialIndex === -1) {
+        return response.status(400).json({
             message: "Product doesn't exists!",
         });
 }
 
-const product: ProductsDTO = Object.assign ({
+const material: MaterialsDTO = Object.assign ({
     name,
-    description,
-    price,
+    quantity,
 });
 
-products[productIndex] = product;
+materials[materialIndex] = material;
 
-return response.json(product);
+return response.json(material);
 
 });
 

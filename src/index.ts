@@ -10,8 +10,8 @@ app.use(express.json());
 
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
-app.get("/terms", async (req, res) => {
-    return res.json({
+app.get("/terms", async (request, response) => {
+    return response.json({
       message: "Termos de Serviço",
     });
 });
