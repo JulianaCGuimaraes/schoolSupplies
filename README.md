@@ -1,7 +1,6 @@
 # schoolSupplies
 
-# Repository cloned initial to:
-Este repositório contém o projeto inicial para o workshop Database Workflows & API Development with Prisma de Nikolas Burk.
+This repository contains the initial project for the Database Workflows & API Development with Prisma workshop by Nikolas Burk.
 
 ## Install dependencies
 Navigate into the project directory and install the npm dependencies with the following command:
